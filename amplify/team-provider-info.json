@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-foxnews-dev-214639-authRole",
+      "UnauthRoleArn": "arn:aws:iam::034187027051:role/amplify-foxnews-dev-214639-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::034187027051:role/amplify-foxnews-dev-214639-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-foxnews-dev-214639-deployment",
+      "UnauthRoleName": "amplify-foxnews-dev-214639-unauthRole",
+      "StackName": "amplify-foxnews-dev-214639",
+      "StackId": "arn:aws:cloudformation:us-east-2:034187027051:stack/amplify-foxnews-dev-214639/b965c6b0-e2ac-11ec-a349-06ae2f810ab6",
+      "AmplifyAppId": "d2r9e83tpamsdb"
+    }
+  }
+}
