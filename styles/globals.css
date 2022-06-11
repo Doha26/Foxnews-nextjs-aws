@@ -3,11 +3,28 @@
 @tailwind utilities;
 html,
 body {
-  background-color: #f9f2e9;
+  background-color: #fff;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+.newsImage {
+  height: 500;
+}
+.masonry {
+  overflow: "scroll";
+  column-count: 3;
+  column-gap: 2rem;
+}
+.overlay {
+  background: linear-gradient(0deg, black, transparent);
+}
+@screen lg {
+  .masonry {
+    overflow: "scroll";
+    column-count: 4;
+  }
 }
 
 a {
