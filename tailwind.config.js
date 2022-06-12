@@ -15,6 +15,12 @@ module.exports = {
       description: "#54595F",
       white: "#fff",
       black: "#000",
+      grey: {
+        100: "#cfd8dc",
+      },
+      blue: {
+        400: "#5c6bc0",
+      },
       red: {
         400: "#ef5350",
         500: "#f44336",
