@@ -1,10 +1,12 @@
 import { createClient } from 'redis'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Header from '../../components/Header'
 import Nav from '../../components/Nav'
 import News from '../../components/NewsItem'
 import PaginationBottom from '../../components/PaginationBottom'
 import { NewsAPIObject } from '../../src/utils'
+import Link from 'next/link'
 
 interface INewsItemPros {
   articles: NewsAPIObject[]
@@ -25,7 +27,10 @@ const NewsItem = ({ articles }: INewsItemPros) => {
     <div className="flex flex-col">
       <Header />
       <Nav />
-      <div className="sm:mx-auto mx-4 sm:mx-0 sm:w-6/12 mt-20">
+      <div className="sm:mx-auto mx-4 sm:mx-0 sm:w-6/12 mt-32">
+        <Link href="/" title="Back to Home">
+          <Image src="/back.svg" alt="Logo" width="39" height="32" className="cursor-pointer"/>
+        </Link>
         {item && (
           <News
             media={item.media}

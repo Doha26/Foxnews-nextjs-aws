@@ -14,7 +14,7 @@ interface IHomeProps {
 }
 const Home: NextPage<IHomeProps> = ({ data, status }: IHomeProps) => {
   //const testing = true
-  const [messageTitle, setMessageTitle] = useState('Latest Updates')
+  const [messageTitle, setMessageTitle] = useState('Latest updates')
   const { articles } = data || {}
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const Home: NextPage<IHomeProps> = ({ data, status }: IHomeProps) => {
     if (!articles) {
       setMessageTitle('Loading...')
     } else {
-      setMessageTitle('Latest Updates')
+      setMessageTitle('Latest updates')
     }
   })
 

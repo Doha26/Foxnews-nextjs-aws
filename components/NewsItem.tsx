@@ -11,7 +11,7 @@ const News = ({ media, title, summary, author, country, published_date, expand }
   return (
     <div
       className={`flex flex-col ${
-        !expand ? 'cursor-pointer transition hover:scale-105 duration-300 ease-in-out delay-50 mt-4' : 'mt-12'
+        !expand ? 'cursor-pointer transition hover:scale-105 duration-300 ease-in-out delay-50 mt-4' : 'mt-8'
       }`}
     >
       <img className={`object-cover rounded w-full ${expand ? 'h-80' : 'h-48'}`} src={media} alt="Img" />
