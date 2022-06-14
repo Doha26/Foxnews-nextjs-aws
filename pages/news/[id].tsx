@@ -1,22 +1,20 @@
-import { createClient } from 'redis'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Header from '../../components/Header'
 import Nav from '../../components/Nav'
 import News from '../../components/NewsItem'
 import PaginationBottom from '../../components/PaginationBottom'
-import { NewsAPIObject } from '../../src/utils'
 import Link from 'next/link'
+import { useAppSelector } from '../../src/store/hooks'
+import { selectArticles } from '../../src/store/slice/articleSlice'
 
-interface INewsItemPros {
-  articles: NewsAPIObject[]
-}
 interface IQueryParam {
   id: string
 }
-const NewsItem = ({ articles }: INewsItemPros) => {
+const NewsItem = () => {
   const router = useRouter()
   const { id } = router.query as unknown as IQueryParam
+  const { articles } = useAppSelector(selectArticles)
 
   const item = articles?.find(article => article._id === id)
   const itemIndex = articles?.findIndex(article => article._id === id)
@@ -48,13 +46,6 @@ const NewsItem = ({ articles }: INewsItemPros) => {
       </div>
     </div>
   )
-}
-
-export async function getServerSideProps() {
-  const client = createClient()
-  await client.connect()
-  const articles = await client.get('articles')
-  return { props: { articles: articles ? JSON.parse(articles) : [] } }
 }
 
 export default NewsItem

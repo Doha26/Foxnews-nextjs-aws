@@ -9,6 +9,7 @@
     // as we are fetching random articles with random images source,
     // we cannot configure next.config.js for every image source provider
     // so, we use native <img> HTMLElement and we disable waring about using <img> rather than next/image
-    "@next/next/no-img-element": "off"
+    "@next/next/no-img-element": "off",
+    "@typescript-eslint/ban-ts-comment": "off"
   }
 }

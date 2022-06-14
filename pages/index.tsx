@@ -1,30 +1,33 @@
-import { createClient } from 'redis'
 import Link from 'next/link'
 import Header from '../components/Header'
 import type { NextPage } from 'next'
 import { useState, useEffect } from 'react'
-import { NewsAPIObject, NewsAPIResponse, NEWS_API_URL } from '../src/utils'
+import { NewsAPIObject } from '../src/utils'
 import News from '../components/NewsItem'
 import Nav from '../components/Nav'
-import getNews from '../lib/getNews'
+import { useAppDispatch, useAppSelector } from '../src/store/hooks'
+import { getArticles, selectArticles } from '../src/store/slice/articleSlice'
 
-interface IHomeProps {
-  data: NewsAPIResponse
-  status: string
-}
-const Home: NextPage<IHomeProps> = ({ data, status }: IHomeProps) => {
-  //const testing = true
+const Home: NextPage = () => {
+  const dispatch = useAppDispatch()
+  const { articles, error, pending } = useAppSelector(selectArticles)
   const [messageTitle, setMessageTitle] = useState('Latest updates')
-  const { articles } = data || {}
 
   useEffect(() => {
-    if (status !== 'ok') setMessageTitle('Unable to load news from API ...')
-    if (!articles) {
+    if (articles.length == 0) {
+      //@ts-ignore
+      dispatch(getArticles())
+    }
+  }, [dispatch, articles])
+
+  useEffect(() => {
+    if (error) setMessageTitle('Unable to load news from API ...')
+    if (pending) {
       setMessageTitle('Loading...')
     } else {
       setMessageTitle('Latest updates')
     }
-  })
+  }, [error, pending])
 
   return (
     <div className="flex flex-col">
@@ -68,36 +71,6 @@ const Home: NextPage<IHomeProps> = ({ data, status }: IHomeProps) => {
       )}
     </div>
   )
-}
-
-export async function getServerSideProps() {
-  const client = createClient()
-  await client.connect()
-  let cachedData: NewsAPIResponse = {}
-  const cacheExist = await client.get('articles')
-
-  if (!cacheExist) {
-    const { status, articles } = await getNews(`${NEWS_API_URL}News`)
-    if (status === 'ok') {
-      cachedData = { status, articles }
-      await client.set('articles', JSON.stringify(articles))
-    }
-  } else {
-    const dataString = await client.get('articles')
-    if (dataString) {
-      const articles = JSON.parse(dataString)
-      cachedData = { articles, status: 'ok' }
-    }
-  }
-  //console.log('cachedData', cachedData?.articles)
-  const { articles } = cachedData
-  if (articles && articles.length > 0) {
-    return {
-      props: { data: cachedData, status: 'ok' }
-    }
-  } else {
-    return { props: { data: [], status: 'error' } }
-  }
 }
 
 export default Home
