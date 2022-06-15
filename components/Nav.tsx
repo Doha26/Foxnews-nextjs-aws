@@ -10,7 +10,7 @@ const Nav = () => (
           <a className="font-mono font-bold text-3xl p-2 hidden sm:block cursor-pointer text-white">FoxNews</a>
         </Link>
       </div>
-      <h1 className="font-mono font-bold text-sm hidden sm:block text-white">
+      <h1 className="font-mono font-bold text-sm hidden md:block text-white">
         Call Us (348)981.872 / hello@foxnews.com
       </h1>
       <h1 className="font-mono font-bold text-sm hover:underline hover:cursor-pointer hover:font-bold text-white">

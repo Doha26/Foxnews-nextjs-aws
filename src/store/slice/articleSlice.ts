@@ -9,18 +9,24 @@ export type NewsState = {
   articles: NewsAPIObject[]
   pending: boolean
   error: boolean
+  fetched: boolean
+  error_code: string
 }
 
 const initialState: NewsState = {
   articles: [],
   pending: false,
-  error: false
+  error: false,
+  fetched: false,
+  error_code: ''
 }
 
-export const getArticles = createAsyncThunk('', async () => {
-  const { status, articles } = await getNews(`${NEWS_API_URL}News`)
-  return status === 'ok' ? articles : []
+export const getArticles = createAsyncThunk('getAticles', async (_, { rejectWithValue }) => {
+  const { status, articles, error_code } = await getNews(`${NEWS_API_URL}News`)
+  return status === 'ok' ? { error: null, articles } : rejectWithValue({ articles: [], error_code })
 })
+
+// HeadersWithoutKey
 export const articlesSlice = createSlice({
   name: 'news',
   initialState,
@@ -33,21 +39,24 @@ export const articlesSlice = createSlice({
     builder
       .addCase(HYDRATE, (state: Draft<typeof initialState>) => {
         console.log('HYDRATE')
-        state.articles = state.articles
       })
       .addCase(getArticles.fulfilled, (state, { payload }) => {
         console.log('FULFILLED')
         state.pending = false
-        state.articles = payload
+        state.articles = payload.articles
+        state.fetched = true
       })
       .addCase(getArticles.pending, state => {
         console.log('PENDING')
         state.pending = true
+        state.fetched = false
       })
-      .addCase(getArticles.rejected, state => {
+      .addCase(getArticles.rejected, (state, { payload }) => {
         console.log('rejected')
         state.pending = false
         state.error = true
+        state.fetched = false
+        state.error_code = payload.error_code
       })
   }
 })

@@ -22,7 +22,7 @@ const PaginationItem = ({ position, title, mediaSource, date, id }: PaginationIt
     </Link>
   ) : (
     <Link href={`/news/${id}`}>
-      <div className="flex mt-10 sm:mt-0 cursor-pointer max-w-sm transition hover:scale-105 duration-300 ease-in-out delay-50 ">
+      <div className="flex mt-10 md:mt-0 cursor-pointer w-full transition hover:scale-105 duration-300 ease-in-out delay-50 ">
         <div className="flex flex-col  mr-2 max-w-xs hover:underline text-right ">
           <strong className="line-clamp-3">{title}</strong>
           <span className="text-sm ">{moment(date).format('MMMM Do YYYY, h:mm:ss a')}</span>

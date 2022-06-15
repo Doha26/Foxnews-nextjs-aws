@@ -7,30 +7,33 @@ import News from '../components/NewsItem'
 import Nav from '../components/Nav'
 import { useAppDispatch, useAppSelector } from '../src/store/hooks'
 import { getArticles, selectArticles } from '../src/store/slice/articleSlice'
+import Footer from '../components/Footer'
 
 const Home: NextPage = () => {
   const dispatch = useAppDispatch()
-  const { articles, error, pending } = useAppSelector(selectArticles)
+  const { articles, error, error_code } = useAppSelector(selectArticles)
   const [messageTitle, setMessageTitle] = useState('Latest updates')
 
   useEffect(() => {
-    if (articles.length == 0) {
-      //@ts-ignore
-      dispatch(getArticles())
-    }
-  }, [dispatch, articles])
-
-  useEffect(() => {
-    if (error) setMessageTitle('Unable to load news from API ...')
-    if (pending) {
-      setMessageTitle('Loading...')
+    //@ts-ignore
+    dispatch(getArticles())
+    setMessageTitle('Loading...')
+    console.log('articles ::>  ', articles)
+    if (error || articles.length == 0) {
+      if (error_code === 'HeadersWithoutKey') {
+        setMessageTitle('No API key provided to fetch News 🧩 ')
+      } else if (error_code === 'ConcurrencyViolation' && articles.length == 0) {
+        setMessageTitle('API Error Wait and then refresh ⛳️')
+      } else {
+        setMessageTitle('Latest updates')
+      }
     } else {
       setMessageTitle('Latest updates')
     }
-  }, [error, pending])
+  }, [articles, dispatch, error_code, error])
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col scrollbar-hide md:scrollbar-default">
       <Header />
       <Nav />
       {articles?.length && (
@@ -43,8 +46,8 @@ const Home: NextPage = () => {
         </div>
       )}
 
-      {articles?.length ? (
-        <div className="sm:px-16 py-8 grid grid-cols-1 sm:grid-cols-3  gap-6 mx-auto w-10/12">
+      {articles?.length && (
+        <div className="sm:px-16 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-6 mx-auto w-10/12 mb-32">
           {articles?.map((item: NewsAPIObject) => {
             return (
               <Link href={`/news/${item._id}`} key={item._id}>
@@ -66,9 +69,11 @@ const Home: NextPage = () => {
             )
           })}
         </div>
-      ) : (
-        <div className="flex font-mono font-bold text-md mx-auto w-10/12 justify-center mt-36"> 0 news Found !</div>
       )}
+      {error && (
+        <div className="flex font-mono font-bold text-md mx-auto w-10/12 justify-center mt-36"> {messageTitle}</div>
+      )}
+      <Footer />
     </div>
   )
 }
