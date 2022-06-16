@@ -18,7 +18,6 @@ const Home: NextPage = () => {
     //@ts-ignore
     dispatch(getArticles())
     setMessageTitle('Loading...')
-    console.log('articles ::>  ', articles)
     if (error || articles.length == 0) {
       if (error_code === 'HeadersWithoutKey') {
         setMessageTitle('No API key provided to fetch News 🧩 ')

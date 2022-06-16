@@ -37,8 +37,8 @@ export const articlesSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(HYDRATE, (state: Draft<typeof initialState>) => {
-        console.log('HYDRATE')
+      .addCase(HYDRATE, (_state: Draft<typeof initialState>) => {
+        console.log('HYDRATE', _state)
       })
       .addCase(getArticles.fulfilled, (state, { payload }) => {
         console.log('FULFILLED')
@@ -56,6 +56,7 @@ export const articlesSlice = createSlice({
         state.pending = false
         state.error = true
         state.fetched = false
+        //@ts-ignore
         state.error_code = payload.error_code
       })
   }
