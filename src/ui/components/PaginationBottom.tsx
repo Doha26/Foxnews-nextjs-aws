@@ -1,4 +1,4 @@
-import { NewsAPIObject } from '../src/utils'
+import { NewsAPIObject } from '../../utils'
 import PaginationItem from './PaginationItem'
 
 interface IPaginationBottomProps {

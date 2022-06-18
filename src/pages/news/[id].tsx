@@ -1,12 +1,12 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import Header from '../../components/Header'
-import Nav from '../../components/Nav'
-import News from '../../components/NewsItem'
-import PaginationBottom from '../../components/PaginationBottom'
+import Header from '../../ui/components/Header'
+import Nav from '../../ui/components/Nav'
+import News from '../../ui/components/NewsItem'
+import PaginationBottom from '../../ui/components/PaginationBottom'
 import Link from 'next/link'
-import { useAppSelector } from '../../src/store/hooks'
-import { selectArticles } from '../../src/store/slice/articleSlice'
+import { useAppSelector } from '../../store/hooks'
+import { selectArticles } from '../../store/slice/articleSlice'
 
 interface IQueryParam {
   id: string

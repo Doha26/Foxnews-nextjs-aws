@@ -1,13 +1,13 @@
 import Link from 'next/link'
-import Header from '../components/Header'
+import Header from '../ui/components/Header'
 import type { NextPage } from 'next'
 import { useState, useEffect } from 'react'
-import { NewsAPIObject } from '../src/utils'
-import News from '../components/NewsItem'
-import Nav from '../components/Nav'
-import { useAppDispatch, useAppSelector } from '../src/store/hooks'
-import { getArticles, selectArticles } from '../src/store/slice/articleSlice'
-import Footer from '../components/Footer'
+import { NewsAPIObject } from '../utils'
+import News from '../ui/components/NewsItem'
+import Nav from '../ui/components/Nav'
+import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { getArticles, selectArticles } from '../store/slice/articleSlice'
+import Footer from '../ui/components/Footer'
 
 const Home: NextPage = () => {
   const dispatch = useAppDispatch()
