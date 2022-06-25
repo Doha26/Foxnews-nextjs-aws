@@ -5,8 +5,7 @@ import Nav from '../../ui/components/Nav'
 import News from '../../ui/components/NewsItem'
 import PaginationBottom from '../../ui/components/PaginationBottom'
 import Link from 'next/link'
-import { useAppSelector } from '../../store/hooks'
-import { selectArticles } from '../../store/slice/articleSlice'
+import { fakeNews } from '../../utils'
 
 interface IQueryParam {
   id: string
@@ -14,7 +13,7 @@ interface IQueryParam {
 const NewsItem = () => {
   const router = useRouter()
   const { id } = router.query as unknown as IQueryParam
-  const { articles } = useAppSelector(selectArticles)
+  const articles = fakeNews
 
   const item = articles?.find(article => article._id === id)
   const itemIndex = articles?.findIndex(article => article._id === id)
@@ -25,7 +24,7 @@ const NewsItem = () => {
     <div className="flex flex-col">
       <Header />
       <Nav />
-      <div className="sm:mx-auto md:w-11/12 sm:w-11/12 mt-32 lg:w-6/12">
+      <div className="md:mx-auto mx-3 md:w-11/12 sm:w-11/12 mt-32 lg:w-6/12">
         <Link href="/" title="Back to Home">
           <Image src="/back.svg" alt="Logo" width="39" height="32" className="cursor-pointer" />
         </Link>
