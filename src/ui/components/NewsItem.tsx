@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import moment from 'moment'
-import { NewsAPIObject } from '../src/utils'
+import { NewsAPIObject } from '../../utils'
 
 const News = ({ media, title, summary, author, country, published_date, expand }: NewsAPIObject) => {
   const [isReadMore, setIsReadMore] = useState(false)
