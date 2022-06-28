@@ -20,7 +20,7 @@ const PaginationBottom = ({ leftItem, rightItem }: IPaginationBottomProps) => {
   } = rightItem as NewsAPIObject
 
   return (
-    <div className="mt-10 mb-20 md:flex flex-row justify-between w-full">
+    <div className="mt-10 mb-20 sm:flex flex-row justify-between w-full ">
       <PaginationItem
         position="left"
         title={leftItemTitle}

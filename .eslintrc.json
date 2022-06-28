@@ -5,6 +5,7 @@
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "react-hooks/rules-of-hooks": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
 
     // as we are fetching random articles with random images source,
     // we cannot configure next.config.js for every image source provider
