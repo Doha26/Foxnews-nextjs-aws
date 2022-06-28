@@ -5,7 +5,8 @@ import Nav from '../../ui/components/Nav'
 import News from '../../ui/components/NewsItem'
 import PaginationBottom from '../../ui/components/PaginationBottom'
 import Link from 'next/link'
-import { fakeNews } from '../../utils'
+import { useAppSelector } from '../../store/hooks'
+import { selectArticles } from '../../store/slice/articleSlice'
 
 interface IQueryParam {
   id: string
@@ -13,7 +14,7 @@ interface IQueryParam {
 const NewsItem = () => {
   const router = useRouter()
   const { id } = router.query as unknown as IQueryParam
-  const articles = fakeNews
+  const { articles } = useAppSelector(selectArticles)
 
   const item = articles?.find(article => article._id === id)
   const itemIndex = articles?.findIndex(article => article._id === id)
