@@ -10,6 +10,14 @@
       "StackName": "amplify-foxnewsnextjsaws-dev-03916",
       "StackId": "arn:aws:cloudformation:us-east-2:034187027051:stack/amplify-foxnewsnextjsaws-dev-03916/014e69a0-e38e-11ec-8a88-02f1b945e5e2",
       "AmplifyAppId": "d3ar264ao4oe5i"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d3ar264ao4oe5i",
+          "type": "manual"
+        }
+      }
     }
   }
 }

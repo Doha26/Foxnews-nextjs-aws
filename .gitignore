@@ -54,3 +54,6 @@ amplifytools.xcconfig
 .secret-*
 .env
 #amplify-do-not-edit-end
+amplify/team-provider-info.json
+1656445157255.zip
+1656445581349.zip
